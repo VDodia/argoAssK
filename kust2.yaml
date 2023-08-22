@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/VDodia/argoAssK.git
+    repoURL: git@github.com/VDodia/argoAssK.git
     targetRevision: HEAD
     path: kustomize-guestbook2
   destination:
