@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flock-notification-pre
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  template:
+    spec:
+      containers:
+      - name: flock-notification
+        image: curlimages/curl
+        command:
+          - "curl"
+          - "-X"
+          - "POST"
+          - "-H"
+          - "Content-Type: application/json"
+          - "-d"
+          - "{\"text\": \"App about to be synced\"}"
+          - "https://api.flock.com/hooks/sendMessage/013389f1-07db-4c06-923e-2c28e01198ff"
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flock-notification-post
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  template:
+    spec:
+      containers:
+      - name: flock-notif
+        image: curlimages/curl
+        command:
+          - "curl"
+          - "-X"
+          - "POST"
+          - "-H"
+          - "Content-Type: application/json"
+          - "-d"
+          - "{\"text\": \"App Synced\"}"
+          - "https://api.flock.com/hooks/sendMessage/013389f1-07db-4c06-923e-2c28e01198ff"
+      restartPolicy: Never
