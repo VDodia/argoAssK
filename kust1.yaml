@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kust1
+  name: prod-guestbook
   namespace: default
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -22,7 +22,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kust2
+  name: stag-guestbook
   namespace: default
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -33,7 +33,7 @@ spec:
     targetRevision: HEAD
     path: kustomize-guestbook2
   destination:
-    server: https://kubernetes.default.svc
+    server: https://34.131.118.29
     namespace: default
   syncPolicy:
     automated:
