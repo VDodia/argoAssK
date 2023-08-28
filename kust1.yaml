@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: git@github.com/VDodia/argoAssK.git
     targetRevision: HEAD
-    path: kustomize-guestbook
+    path: prod-guestbook
   destination:
     server: https://kubernetes.default.svc
     namespace: default
@@ -31,7 +31,7 @@ spec:
   source:
     repoURL: git@github.com/VDodia/argoAssK.git
     targetRevision: HEAD
-    path: kustomize-guestbook2
+    path: staging-guestbook
   destination:
     server: https://34.131.118.29
     namespace: default
